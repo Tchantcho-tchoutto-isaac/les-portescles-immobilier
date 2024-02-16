@@ -2,31 +2,25 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Http\JsonResponse;
 
     
 class ArticleController extends Controller{
-        // Afficher la liste des articles
-    public function index()
+    public function index(): JsonResponse
     {
         $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        return response()->json(['articles' => $articles]);
     }
 
     // Afficher un article spécifique
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $article = Article::findOrFail($id);
-        return view('articles.show', compact('article'));
-    }
-
-    // Afficher le formulaire de création d'un nouvel article
-    public function create()
-    {
-        return view('articles.create');
+        return response()->json(['article' => $article]);
     }
 
     // Valider et enregistrer un nouvel article
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
             'title' => 'required',
@@ -35,19 +29,12 @@ class ArticleController extends Controller{
             // Ajoutez ici les règles de validation pour les autres champs si nécessaire
         ]);
 
-        Article::create($validatedData);
-        return redirect('/articles')->with('success', 'Article créé avec succès!');
-    }
-
-    // Afficher le formulaire de modification d'un article existant
-    public function edit($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('articles.edit', compact('article'));
+        $article = Article::create($validatedData);
+        return response()->json(['article' => $article, 'message' => 'Article créé avec succès!'], 201);
     }
 
     // Valider et mettre à jour un article existant
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         $validatedData = $request->validate([
             'title' => 'required',
@@ -56,16 +43,18 @@ class ArticleController extends Controller{
             // Ajoutez ici les règles de validation pour les autres champs si nécessaire
         ]);
 
-        Article::whereId($id)->update($validatedData);
-        return redirect('/articles')->with('success', 'Article mis à jour avec succès!');
+        $article = Article::findOrFail($id);
+        $article->update($validatedData);
+
+        return response()->json(['article' => $article, 'message' => 'Article mis à jour avec succès!']);
     }
 
     // Supprimer un article existant
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $article = Article::findOrFail($id);
         $article->delete();
-        return redirect('/articles')->with('success', 'Article supprimé avec succès!');
+        return response()->json(['message' => 'Article supprimé avec succès!']);
     }
 }
     
