@@ -1,11 +1,11 @@
-import './bootstrap';
-require('./bootstrap');
+import { createApp } from 'vue';
+import App from './App.vue'; 
+import  routes from './router.js'
+import "../css/app.css"
+/*import ArticlesList from './components/ArticlesList.vue';*/
 
-// 1. On importe createApp
-import { createApp } from "vue"
+createApp(App).use(routes).mount('#app');
 
-// 2. On importe AppComponent.vue
-import AppComponent from "./components/ArticleDetail.vue"
 
-// 3. On monte l'application Vue sur l'élément #app
-createApp(AppComponent).mount("#app")
+
+

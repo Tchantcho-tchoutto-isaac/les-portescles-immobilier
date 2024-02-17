@@ -1,21 +1,20 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel</title>
-       
-        @vite(['resources/css/app.css']) 
-
-    
+        
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+     
     </head>
     <body class="antialiased">
         <h1>test app</h1>
         <!-- L'élément HTML d'identifiant "app" -->
         <div id="app">
-           
+            <Article-Listt></Article-List>
         </div>
-
-        @vite(['resources/js/App.js',])
+      
     </body>
 </html>
