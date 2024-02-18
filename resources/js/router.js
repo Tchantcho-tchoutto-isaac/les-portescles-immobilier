@@ -4,10 +4,12 @@ import ArticleDetail from './components/ArticleDetail.vue';
 /*import ArticleForm from './components/ArticleForm.vue';*/
 import AjouterArticle from './components/AjouterArticle.vue';
 import ModifierArticle from './components/ModifierArticle.vue';
+import EditArticle from './components/EditArticle.vue';
 
 const routes = [
   { path: '/', name: 'ArticleList', component: ArticleList },
-  {path: '/modifier-article/:{{id}}',name: 'ModifierArticle',component: ModifierArticle},
+  { path: '/article/Edit_article', name: 'EditArticle', component:EditArticle  },
+  {path: '/article/modifier-article/:id?',name: 'ModifierArticle',component: ModifierArticle},
   { path: '/ajouter-article', name: 'AjouterArticle', component: AjouterArticle },
  /* { path: '/ajouter-article', name: 'ArticleForm', component: ArticleForm },*/
   { path: '/article/:id', name: 'ArticleDetail', component: ArticleDetail, props: true },

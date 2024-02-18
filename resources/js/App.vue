@@ -2,6 +2,7 @@
   <div id="app">
     <Header />
     <router-view />
+    <Footer/>
   </div>
 </template>
 
@@ -9,16 +10,22 @@
 import { defineComponent } from 'vue';
 import Header from './components/header.vue'; // Import correct du composant Header
 import router from './router';
+import Footer from './components/Footer.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Header
+    Header,
+    Footer
   },
   router
 });
 </script>
 
 <style scoped>
-/* Styles spécifiques à ce composant */
+  #app{
+ align-items: center;
+  }
+
+
 </style>

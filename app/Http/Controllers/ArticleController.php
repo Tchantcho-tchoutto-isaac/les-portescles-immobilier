@@ -40,6 +40,7 @@ class ArticleController extends Controller{
             'title' => 'required',
             'content' => 'required',
             'category' => 'required',
+            'image' => 'required',
             // Ajoutez ici les règles de validation pour les autres champs si nécessaire
         ]);
 
